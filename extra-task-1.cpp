@@ -155,7 +155,8 @@ double time_to_utc(int utc_offset, double time)
         >>> time_to_utc(-1, 23.0)
         0.0
     */
-	return static_cast<int>((time - utc_offset)) % 24;
+	int x = static_cast<int>((time - utc_offset));
+	return x >= 0 ? x % 24 : x + 24;
 }
 
 double time_from_utc(int utc_offset, double time)
@@ -187,5 +188,6 @@ double time_from_utc(int utc_offset, double time)
         >>> time_from_utc(+1, 23.0)
         0.0
     */
-	return 0;
+	int x = static_cast<int>((time + utc_offset));
+	return x >= 0 ? x % 24 : x + 24;
 }
